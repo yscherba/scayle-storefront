@@ -1,0 +1,12 @@
+packages:
+  - './'
+  - '!playwright/'
+ignoredBuiltDependencies:
+  - '@parcel/watcher'
+  - 'core-js'
+  - 'es5-ext'
+  - 'esbuild'
+  - 'protobufjs'
+  - 'sharp'
+  - 'unrs-resolver'
+  - 'vue-demi'

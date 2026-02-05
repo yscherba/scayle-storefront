@@ -1,0 +1,194 @@
+import { Meta } from '@storybook/addon-docs/blocks'
+
+<Meta title='Getting Started' />
+
+<style jsx>
+  {`
+    .sbdocs-content {
+      max-width: 2000px;
+    }
+    .sbdocs-wrapper {
+      background-color: #0e191a;
+    }
+    .hero {
+      padding: 4rem 2rem;
+      color: white;
+      text-align: center;
+      font-family: Inter, sans-serif;
+    }
+
+    .hero-header {
+      padding: 4rem 2rem;
+      color: white;
+      text-align: center;
+      font-family: Inter, sans-serif;
+    }
+
+    .hero-header h1 {
+      color: #00ff9d;
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      color: #cbd5e1;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .cards {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .card {
+      background-color: #0e191a;
+      border-radius: 1rem;
+      padding: 2rem;
+      width: 280px;
+      text-align: left;
+      box-shadow: 0 0 12px rgba(0, 255, 157, 0.2);
+      transition: transform 0.3s ease;
+    }
+
+    .card h3 {
+      margin-top: 0;
+      color: white;
+    }
+
+    .card p {
+      color: #94a3b8;
+    }
+
+    .card a {
+      display: block;
+      margin-top: 1rem;
+      color: #00ff9d;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .resources-section {
+      margin-top: 4rem;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .resources-section h2 {
+      color: #00ff9d;
+      margin-bottom: 2rem;
+    }
+
+    .resources-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .resource-card {
+      background-color: #0e191a;
+      border-radius: 1rem;
+      padding: 1.5rem;
+      text-align: left;
+      box-shadow: 0 0 12px rgba(0, 255, 157, 0.2);
+    }
+
+    .resource-card h3 {
+      color: white;
+      margin-top: 0;
+    }
+
+    .resource-card ul {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
+
+    .resource-card li {
+      color: #94a3b8;
+      margin-bottom: 0.5rem;
+      padding-left: 1.5rem;
+      position: relative;
+    }
+
+    .resource-card li:before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: #00ff9d;
+    }
+
+    .resource-card a {
+      color: #00ff9d;
+      text-decoration: none;
+      font-weight: bold;
+    }
+  `}
+</style>
+
+<div class="hero">
+  <div class="hero-header">
+    <h1>Welcome to Storefront Component Library</h1>
+    <p>Explore UI components, patterns, and documentation built for your Storefront Application.</p>
+  </div>
+
+{' '}
+
+<div class='cards'>
+  <div class='card'>
+    <h3>🚀 Get Started</h3>
+    <p>Learn how to create and use your component library in a Nuxt project.</p>
+    <a
+      href='https://storybook.js.org/docs/get-started/whats-a-story#create-a-new-story'
+      target='_blank'
+    >
+      Create a new story
+    </a>
+  </div>
+  <div class='card'>
+    <h3>🧩 Components</h3>
+    <p>Browse all components and see usage examples and props.</p>
+  </div>
+  <div class='card'>
+    <h3>🎨 Theming</h3>
+    <p>Customize the look and feel with Tailwind or your design tokens.</p>
+  </div>
+</div>
+
+  <div class="resources-section">
+    <h2>Storybook Resources & Tips</h2>
+    <div class="resources-grid">
+      <div class="resource-card">
+        <h3>📚 Official Documentation</h3>
+        <ul>
+          <li><a href="https://storybook.js.org/docs" target="_blank">Storybook Documentation</a></li>
+          <li><a href="https://storybook.js.org/docs/vue/get-started/introduction" target="_blank">Getting Started Guide</a></li>
+          <li><a href="https://storybook.js.org/docs/vue/writing-stories/introduction" target="_blank">Writing Stories</a></li>
+        </ul>
+      </div>
+      <div class="resource-card">
+        <h3>🛠️ Nuxt Integration</h3>
+        <ul>
+          <li><a href="https://storybook.nuxtjs.org/" target="_blank">Storybook Nuxt Module</a></li>
+          <li><a href="https://storybook.nuxtjs.org/getting-started/installation" target="_blank">Installation Guide</a></li>
+          <li><a href="https://storybook.nuxtjs.org/recipes/auto-docs" target="_blank">Auto Documentation</a></li>
+        </ul>
+      </div>
+      <div class="resource-card">
+        <h3>💡 Best Practices</h3>
+        <ul>
+          <li>Use controls for interactive props</li>
+          <li>Write clear component descriptions</li>
+          <li>Include usage examples</li>
+          <li>Document component variants</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
