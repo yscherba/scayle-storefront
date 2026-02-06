@@ -1,73 +1,70 @@
 
 <template>
-  <form @submit.prevent="onSubmit" class="space-y-4">
-    <SFErrorMessageContainer :message="errorMessage" class="mb-4" />
+  <div class="p-6 max-w-md mx-auto">
+    <h3 class="text-xl font-semibold mb-4">Add Address Form</h3>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <SFValidatedInputGroup v-slot="{ isValid }" :errors="v.firstName.$errors">
-        <SFTextInput
-          v-model="payload.firstName"
-          :has-errors="!isValid"
-          :placeholder="$t('form_fields.first_name')"
-          required
-          @change="v.firstName.$touch()"
-        />
-      </SFValidatedInputGroup>
-
-      <SFValidatedInputGroup v-slot="{ isValid }" :errors="v.lastName.$errors">
-        <SFTextInput
-          v-model="payload.lastName"
-          :has-errors="!isValid"
-          :placeholder="$t('form_fields.last_name')"
-          required
-          @change="v.lastName.$touch()"
-        />
-      </SFValidatedInputGroup>
+    <div class="bg-gray-50 p-4 rounded-lg mb-4">
+      <h4 class="font-medium mb-2">Dummy Address Data:</h4>
+      <pre class="text-sm text-gray-600 whitespace-pre-wrap">{{ JSON.stringify(dummyAddress2) }}</pre>
     </div>
 
-    <!-- More form fields... -->
-
-    <div class="flex justify-end gap-3 pt-4">
-      <SFButton type="button" variant="secondary" @click="$emit('cancel')">
-        {{ $t('global.cancel') }}
-      </SFButton>
-      <SFButton type="submit" :loading="isSubmitting" :disabled="v.$invalid">
-        {{ mode === 'create' ? $t('global.create') : $t('global.save') }}
-      </SFButton>
-    </div>
-  </form>
+    <SFButton
+      @click="handleSave(dummyAddress2)"
+      variant="primary"
+      class="w-full"
+    >
+      Save Dummy Address
+    </SFButton>
+  </div>
 </template>
 
 <script setup lang="ts">
 import { reactive, computed, ref } from 'vue'
 import useVuelidate from '@vuelidate/core'
-import { useValidationRules } from '~/composables'
+import { useValidationRules, useToast } from '~/composables'
+import type { ShopUserAddress } from '@scayle/storefront-nuxt'
+import { useRpcCall } from '#storefront/composables'
+import { useRouter } from '#app/composables/router'
+import { routeList } from '~/utils/route'
+import { useUser } from '#storefront/composables'
 
-const props = defineProps<{
-  address?: Address
-  mode: 'create' | 'edit'
-}>()
+import {
+  SFButton,
+  SFTextInput,
+  SFValidatedInputGroup,
+} from '#storefront-ui/components'
 
-const emit = defineEmits<{
-  save: [data: AddressFormData]
-  cancel: []
-}>()
+const createAddress = useRpcCall('createAddress')
+const router = useRouter()
+const toast = useToast()
+const { user } = useUser()
 
-// Form state similar to profile form
-const validationRules = useValidationRules()
-const payload = reactive({
-  firstName: props.address?.firstName ?? '',
-  lastName: props.address?.lastName ?? '',
-  street: props.address?.street ?? '',
-  // ... other fields
-})
-
-const rules = computed(() => ({
-  firstName: { required: validationRules.required },
-  lastName: { required: validationRules.required },
-  street: { required: validationRules.required },
-  // ... other validations
+const dummyAddress2 = computed(() => ({
+  countryCode: 'USA',
+  city: 'New York',
+  street: 'Fat Cafe Street',
+  houseNumber: '17',
+  zipCode: '14003',
+  isDefault: { shipping: false, billing: false },
+  customer: { id: user.value?.id || 1 },
+  recipient: {
+    firstName: user.value?.firstName || 'John',
+    gender: user.value?.gender || 'm',
+    lastName: user.value?.lastName || 'Doe',
+   }
 }))
 
+const handleSave = async (address) => {
+  try {
+    await createAddress({ address: address }) // RPC call with correct parameter structure
+    toast.show('Address created successfully', { type: 'SUCCESS' })
+    //router.push(routeList.addressBook.path)
+  } catch (error) {
+    toast.show('Failed to create address', { type: 'ERROR' })
+  }
+}
+
+const payload = reactive({})
+const rules = computed(() => ({}))
 const v = useVuelidate(rules.value, payload)
 </script>

@@ -46,11 +46,6 @@
       <IconChevronRight class="size-4" />
     </SFButton>
   </SFLocalizedLink>
-  <SFButton
-  size="md"
-  class="flex items-center justify-between rounded-xl m-2"
-  @click="addNewAddress()"
-  variant="primary">Add another address</SFButton>
 </template>
 
 <script setup lang="ts">
@@ -58,14 +53,9 @@
   import { useRouteHelpers } from '~/composables'
   import SFLocalizedLink from '../SFLocalizedLink.vue'
   import type { ShopUserAddress } from '@scayle/storefront-nuxt'
-  import { routeList } from '~/utils/route'
-  const { getAddressEditRoute, localizedNavigateTo } = useRouteHelpers()
-
+  const { getAddressEditRoute } = useRouteHelpers()
   const { address } = defineProps<{
     address: ShopUserAddress
   }>()
 
-  const addNewAddress = async () => {
-    await localizedNavigateTo(routeList.addressNew)
-  }
 </script>
